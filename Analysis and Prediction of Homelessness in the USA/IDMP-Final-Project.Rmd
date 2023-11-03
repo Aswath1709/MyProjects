@@ -1,0 +1,263 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(readr)
+library(mlbench)
+library(lifecycle)
+library(caret)
+library(modelr)
+library(tidyverse)
+library(mice)
+library(readxl)
+library(tidyverse)
+library(readr)
+```
+
+
+```{r}
+HUD_DF <- read_csv("Data.csv")
+```
+
+
+```{r}
+Working_dataset <- HUD_DF %>% 
+  dplyr::select("year", "cocnumber","pit_vet_hless_pit_hud","hou_pol_bed_oph_hic_hud","pit_tot_hless_pit_hud", "pit_tot_shelt_pit_hud", "pit_tot_unshelt_pit_hud","dem_pop_pop_census", "dem_pop_male_census", "total_rent_inventory_acs5yr", "dem_soc_ed_bach_acs5yr", "dem_soc_ed_hsgrad_acs5yr", "dem_soc_ed_lesshs_acs5yr", "econ_labor_topskilled_acs5yr","econ_labor_midskilled_acs5yr","econ_labor_unskilled_acs5yr", "econ_labor_medinc_acs5yr","econ_labor_pov_acs5yr", "hou_mkt_rentvacancy_acs5yr", "hou_mkt_pplunit_psh_hud","hou_mkt_rentshare_acs5yr", "econ_sn_ssdi_SSA", "econ_sn_ssi_pay_SSA","hou_pol_hlessconduct_food", "dem_pop_adult_census_share", "dem_soc_singadult_xt","dem_health_mentalhlth_chr_share","dem_soc_vet_xt","dem_pop_senior_census", "dem_health_cost_dart","ln_hou_mkt_medrent_xt", "hou_mkt_utility_xt", "hou_mkt_burden_own_acs5yr",   "hou_mkt_rentvacancy_xt", "hou_mkt_density_dummy", "hou_mkt_evict_count", "hou_mkt_ovrcrowd_acs5yr", "major_city", "suburban","econ_labor_unemp_rate_BLS", "econ_labor_incineq_acs5yr", "econ_labor_pov_pop_census_share","hou_pol_hudunit_psh_hud_share", "hou_pol_occhudunit_psh_hud", "hou_mkt_homeage1940_xt", "dem_soc_black_census", "dem_soc_hispanic_census", "dem_soc_asian_census", "env_wea_avgtemp_noaa", "dem_soc_pacific_census", "dem_pop_child_census",  "dem_pop_female_census", "dem_pop_mig_census", "dem_health_excesdrink_chr", "d_dem_pop_mig_census_share",  "dem_soc_singparent_xt",  "dem_soc_ed_lessbach_xt",  "env_wea_avgtemp_summer_noaa", "env_wea_precip_noaa", "env_wea_precip_annual_noaa")
+```
+
+
+```{r}
+head(as_tibble(Working_dataset))
+
+```
+
+
+```{r}
+Working_dataset <- Working_dataset %>% 
+  rename(Year = year,
+         CoC_Number = cocnumber,
+         Total_Veterans = pit_vet_hless_pit_hud,
+         Permanent_Housing=hou_pol_bed_oph_hic_hud,
+         Total_Homeless = pit_tot_hless_pit_hud, 
+         Total_Sheltered = pit_tot_shelt_pit_hud, 
+         Total_Unsheltered = pit_tot_unshelt_pit_hud,
+         Total_Population = dem_pop_pop_census, 
+         Total_Male = dem_pop_male_census, 
+         Total_Rental_Units = total_rent_inventory_acs5yr, 
+         Bachelors_higher = dem_soc_ed_bach_acs5yr, 
+         Highschool_Higher = dem_soc_ed_hsgrad_acs5yr, 
+         Highschool_Lower = dem_soc_ed_lesshs_acs5yr, 
+         Employment_Bachelors = econ_labor_topskilled_acs5yr,
+         Employment_Highschool = econ_labor_midskilled_acs5yr,
+         Employment_Lower = econ_labor_unskilled_acs5yr, 
+         Median_Income = econ_labor_medinc_acs5yr,
+         Population_poverty = econ_labor_pov_acs5yr, 
+         Vacant_2_Total = hou_mkt_rentvacancy_acs5yr, 
+         People_Per_Unit = hou_mkt_pplunit_psh_hud,
+         Renter_Occupied = hou_mkt_rentshare_acs5yr, 
+         Disabled_Workers = econ_sn_ssdi_SSA, 
+         Amount_Payments = econ_sn_ssi_pay_SSA,
+         Number_Foodshare_Laws = hou_pol_hlessconduct_food, 
+         Adult_Population_Share = dem_pop_adult_census_share, 
+         One_Person_Household = dem_soc_singadult_xt,
+         Count_Mental_Provider = dem_health_mentalhlth_chr_share,
+         Veretran_Population = dem_soc_vet_xt,
+         Senior_Citizens = dem_pop_senior_census, 
+         Change_HealthCost = dem_health_cost_dart,
+         Log_Median_Rent = ln_hou_mkt_medrent_xt, 
+         House_Market_Utility = hou_mkt_utility_xt, 
+         Owner_Occupier = hou_mkt_burden_own_acs5yr,
+         Vacant_Units = hou_mkt_rentvacancy_xt,
+         High_Housing_Density_Indicator = hou_mkt_density_dummy,
+         Eviction_Count = hou_mkt_evict_count,
+         Overcrowded_Units = hou_mkt_ovrcrowd_acs5yr, 
+         City = major_city,
+         Suburban = suburban,
+         Unemployment_Rate = econ_labor_unemp_rate_BLS,
+         Gini_Index = econ_labor_incineq_acs5yr,
+         Poverty_Rate = econ_labor_pov_pop_census_share,
+         HUD_Subsidized_Units = hou_pol_hudunit_psh_hud_share,
+         Occupied_HUD = hou_pol_occhudunit_psh_hud, 
+         Buildings_1940 = hou_mkt_homeage1940_xt,
+         Total_Black = dem_soc_black_census,
+         Total_Hispanic = dem_soc_hispanic_census, 
+         Total_Asian = dem_soc_asian_census,
+         Average_Jan_Temp = env_wea_avgtemp_noaa, 
+         Total_Pacific_Islander = dem_soc_pacific_census, 
+         Total_Child = dem_pop_child_census, 
+         Total_Female = dem_pop_female_census, 
+         Net_Migration = dem_pop_mig_census,
+         Drinking_Problem = dem_health_excesdrink_chr,
+         Change_Migration = d_dem_pop_mig_census_share,  
+         Single_Parent = dem_soc_singparent_xt, 
+         Degreeless_Middleage = dem_soc_ed_lessbach_xt,  
+         Avg_Summer_Temperature = env_wea_avgtemp_summer_noaa,
+         January_Precipitation = env_wea_precip_noaa, 
+         Annual_Precipitation = env_wea_precip_annual_noaa)
+```
+
+
+```{r}
+library(ggmice)
+#md.pattern(Working_dataset,rotate.names = TRUE)
+plot_pattern(
+  Working_dataset,rotate = TRUE
+)
+```
+
+
+
+
+```{r}
+tempData <- mice(Working_dataset,m=5,maxit=5,meth='cart',seed=500)
+```
+
+
+```{r}
+completedData <- complete(tempData,1)
+```
+
+
+```{r}
+completedData %>% 
+  mutate(Rate_Homeless = Total_Homeless/(Total_Population/100)) %>% 
+  ggplot(aes(x = Rate_Homeless)) +
+  geom_histogram(boundary = 0, bins = 10) +
+  labs(x = "Homeless rate per 100", y = "Count") 
+```
+
+
+```{r}
+completedData %>%
+  mutate(Rate_Homeless = Total_Homeless/(Total_Population/10000)) %>%
+  ggplot() +
+  geom_boxplot(aes(y = Rate_Homeless))
+
+```
+
+
+```{r}
+
+completedData <- completedData %>% 
+  mutate(Rate_Sheltered = Total_Sheltered/(Total_Population/10000),
+         Rate_Unsheltered = Total_Unsheltered/(Total_Population/10000),
+         Rate_Homeless = Total_Homeless/(Total_Population/10000))
+```
+
+```{r}
+correlation <- completedData %>% 
+  select_if(is.numeric) %>% 
+  cor(use = "pairwise.complete.obs")
+```
+
+
+```{r}
+round(correlation["Rate_Homeless",],2)
+```
+```{r}
+colnames(completedData)
+```
+
+
+```{r}
+completedData <- completedData %>% 
+  dplyr::select(-("Year"))%>%
+  dplyr::select(-("CoC_Number"))%>%
+  dplyr::select(-("Total_Sheltered"))%>%
+  dplyr::select(-("Total_Unsheltered"))
+```
+
+
+```{r}
+completedData
+
+```
+
+```{r}
+hist(completedData$Total_Homeless,breaks = 1000,main = "Total Homeless Distribution (Right Skewed)")
+hist(log(completedData$Total_Homeless),breaks = 300,main = "Total Homeless Distribution (Log Transformed)")
+```
+
+```{r}
+features_df <- subset(completedData,select = -c(Rate_Homeless,Total_Homeless))
+scaled_features <- as.data.frame(scale(features_df))
+```
+
+
+```{r}
+scaled_features$Total_Homeless <- log(completedData$Total_Homeless)
+```
+
+```{r}
+set.seed(5)
+completed_Data_Part <- resample_partition(scaled_features,
+                                    p=c(train=0.8,
+                                        valid=0.2))
+```
+
+
+
+```{r}
+
+fit2 <- lm(Total_Homeless ~ Total_Veterans+Highschool_Higher+Median_Income+Population_poverty+Disabled_Workers+Amount_Payments+ Number_Foodshare_Laws+Senior_Citizens+High_Housing_Density_Indicator+Overcrowded_Units+City+Suburban+Unemployment_Rate+Poverty_Rate+Total_Pacific_Islander+Drinking_Problem+ Single_Parent,completed_Data_Part$train)
+
+summary(fit2)
+
+```
+
+
+```{r}
+plot(fit2)
+step(fit2)
+
+```
+
+
+```{r}
+rmse(fit2,completed_Data_Part$valid)
+mae(fit2,completed_Data_Part$valid)
+```
+
+
+```{r}
+
+library(randomForest)
+
+fit4 <- randomForest(Total_Homeless ~ Total_Veterans+Highschool_Higher+Median_Income+Population_poverty+Disabled_Workers+Amount_Payments+ Number_Foodshare_Laws+Senior_Citizens+High_Housing_Density_Indicator+Overcrowded_Units+City+Suburban+Unemployment_Rate+Poverty_Rate+Total_Pacific_Islander+Drinking_Problem+ Single_Parent,completed_Data_Part$train, ntree=1000,keep.forest=TRUE, importance=TRUE,na.action = na.roughfix)
+
+
+```
+
+```{r}
+plot(fit4)
+#step(fit3)
+```
+
+```{r}
+ImpData <- as.data.frame(importance(fit4))
+ImpData$Var.Names <- row.names(ImpData)
+
+ggplot(ImpData, aes(x=Var.Names, y=`%IncMSE`)) +
+  geom_segment( aes(x=Var.Names, xend=Var.Names, y=0, yend=`%IncMSE`), color="skyblue") +
+  geom_point(aes(size = IncNodePurity), color="blue", alpha=0.6) +
+  theme_light() +
+  coord_flip() +
+  theme(
+    legend.position="bottom",
+    panel.grid.major.y = element_blank(),
+    panel.border = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+
+
+
+```{r}
+rmse(fit4,completed_Data_Part$valid)
+mae(fit4,completed_Data_Part$valid)
+```
