@@ -1,3 +1,4 @@
+import pandas as pd
 from fastapi import FastAPI, Request, Header
 from fastapi.middleware.cors import CORSMiddleware
 import json
@@ -148,19 +149,80 @@ async def semantic_search(request: Request):
 @app.post("/receive-products/")
 async def receive_products(request: Request):
     """
-    This endpoint can be used to sync your Shopify products with Pinecone.
-    You can call this from your Shopify admin app to index products.
+    This endpoint receives products from Shopify and saves them to a CSV file.
     """
     products = await request.json()
     print(f"✅ Received {len(products)} products from Shopify app.")
     
-    # Log product titles - these are the exact titles you need to match
-    print("\n📝 First Product in your Shopify store:")
-    print(products[0])
+    # Log first product for debugging
+    if products:
+        print("\n📝 First Product in your Shopify store:")
+        print(json.dumps(products[0], indent=2))
     
+    # Prepare data for DataFrame
+    product_data = []
     
+    for product in products:
+        # Extract image URLs as a list
+        image_urls = []
+        
+        # Method 1: Get from imageUrls if available
+        if 'imageUrls' in product and product['imageUrls']:
+            image_urls = product['imageUrls']
+        # Method 2: Get from images array if available
+        elif 'images' in product and product['images']:
+            image_urls = [img['url'] for img in product['images'] if 'url' in img]
+        # Method 3: Fall back to single image if available
+        elif 'image' in product and product['image']:
+            image_urls = [product['image']]
+        
+        # Create row for DataFrame
+        row = {
+            'product_handle': product.get('handle', ''),
+            'title': product.get('title', ''),
+            'description': product.get('description', ''),
+            'price': product.get('price', '0.00'),
+            'images': json.dumps(image_urls)  # Store as JSON string for CSV
+        }
+        
+        product_data.append(row)
     
-    return {"status": "received", "product_count": len(products)}
+    # Create DataFrame
+    df = pd.DataFrame(product_data)
+    
+    # Generate filename with timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    csv_filename = f"shopify_products_{timestamp}.csv"
+    
+    # Save to CSV
+    df.to_csv(csv_filename, index=False, encoding='utf-8')
+    
+    print(f"✅ CSV file saved: {csv_filename}")
+    print(f"📊 DataFrame shape: {df.shape}")
+    print(f"📋 Columns: {df.columns.tolist()}")
+    
+    # Also save a latest version (overwrite)
+    df.to_csv("shopify_products_latest.csv", index=False, encoding='utf-8')
+    
+    # Optional: Display first few rows for verification
+    print("\n📑 First 3 products in CSV:")
+    print(df.head(3).to_string())
+    
+    # Calculate some statistics
+    stats = {
+        "total_products": len(df),
+        "products_with_descriptions": df['description'].notna().sum(),
+        "products_with_images": sum(1 for imgs in df['images'] if imgs != '[]'),
+        "average_images_per_product": sum(len(json.loads(imgs)) for imgs in df['images']) / len(df) if len(df) > 0 else 0
+    }
+    
+    return {
+        "status": "received",
+        "product_count": len(products),
+        "csv_filename": csv_filename,
+        "csv_saved": True,
+        "statistics": stats
+    }
 
 @app.post("/product-webhook/")
 async def product_webhook(

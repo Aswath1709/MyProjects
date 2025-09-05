@@ -3,7 +3,7 @@
 client_id = "a1414f594adaa6e69e963d20207a1aac"
 name = "multimodal-product-discovery"
 handle = "multimodal-product-discovery"
-application_url = "https://taking-glory-cholesterol-indianapolis.trycloudflare.com"
+application_url = "https://passing-maybe-oven-architect.trycloudflare.com"
 embedded = true
 
 [build]
@@ -30,7 +30,7 @@ api_version = "2025-04"
 scopes = "read_products,write_products"
 
 [auth]
-redirect_urls = ["https://taking-glory-cholesterol-indianapolis.trycloudflare.com/auth/callback", "https://taking-glory-cholesterol-indianapolis.trycloudflare.com/auth/shopify/callback", "https://taking-glory-cholesterol-indianapolis.trycloudflare.com/api/auth/callback"]
+redirect_urls = ["https://passing-maybe-oven-architect.trycloudflare.com/auth/callback", "https://passing-maybe-oven-architect.trycloudflare.com/auth/shopify/callback", "https://passing-maybe-oven-architect.trycloudflare.com/api/auth/callback"]
 
 [pos]
 embedded = false
