@@ -1,0 +1,3 @@
+# SemantiScout
+
+Develop a state-of-the-art product search engine that leverages multimodal data (text and images) to accurately understand and meet user search intentions, enhancing relevance and overall satisfaction. The project involves building a robust end-to-end ETL pipeline capable of processing large datasets, enabling effective semantic search across diverse product categories. This solution is ideal for e-commerce platforms, digital content libraries, advertising networks, tech startups, and enterprise content management systems looking to improve search performance and boost user engagement.

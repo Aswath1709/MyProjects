@@ -1,0 +1,64 @@
+{
+  "name": "attendance_management",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-brands-svg-icons": "^5.15.2",
+    "@fortawesome/free-regular-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/data-grid": "^4.0.0-alpha.23",
+    "@material-ui/icons": "^4.11.2",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.8.0",
+    "bootstrap": "^4.0.0-alpha.6",
+    "canvasjs": "^1.8.3",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "crypto-js": "^4.0.0",
+    "font-awesome": "^4.7.0",
+    "mocha": "^8.3.2",
+    "react": "^17.0.1",
+    "react-base64-downloader": "^2.1.7",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^17.0.1",
+    "react-font-loader": "^2.0.0",
+    "react-google-charts": "^3.0.15",
+    "react-icons": "^4.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-spring": "^8.0.27",
+    "reactstrap": "^8.9.0",
+    "recharts": "^2.0.9",
+    "root": "^3.2.0",
+    "sweetalert2": "^11.0.16",
+    "web-vitals": "^1.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

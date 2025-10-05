@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>University Recommender</title>
+	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="static/css/all.css">
+	<link rel="stylesheet" type="text/css" href="static/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="static/css/lightbox.css">
+	<link rel="stylesheet" type="text/css" href="static/css/flexslider.css">
+	<link rel="stylesheet" type="text/css" href="static/css/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="static/css/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="static/css/jquery.rateyo.css"/>
+	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.mmenu.all.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/meanmenu.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="static/inner-page-style.css">
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700" rel="stylesheet">
+</head>
+<body>
+
+	<style>
+
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 320px;
+  border: 10px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: rgb(55, 157, 252);
+  color: white;
+  transform: rotateY(180deg);
+}
+	</style>
+
+	<div id="page" class="site" itemscope itemtype="http://schema.org/LocalBusiness">
+		<header class="site-header">
+			<div class="top-header">
+				<div class="container">
+					<div class="top-header-left">
+						<div class="top-header-block">
+							<h3 style="color: white;">University Recommender</h3>
+						</div>
+						<!-- <div class="top-header-block">
+							<a href="tel:+918754220465" itemprop="telephone"><i class="fas fa-phone"></i> +918754220465</a>
+						</div> -->
+					</div>
+					<div class="top-header-right">
+						<!-- <div class="social-block">
+							<ul class="social-list">
+								<li><a href=""><i class="fab fa-viber"></i></a></li>
+								<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+								<li><a href=""><i class="fab fa-facebook-square"></i></a></li>
+								<li><a href=""><i class="fab fa-facebook-messenger"></i></a></li>
+								<li><a href=""><i class="fab fa-twitter"></i></a></li>
+								<li><a href=""><i class="fab fa-skype"></i></a></li>
+							</ul>
+						</div> -->
+						<!-- <div class="login-block">
+							<a href="">Login /</a>
+							<a href="">Register</a>
+						</div> -->
+					</div>
+				</div>
+			</div>
+			<!-- Top header Close -->
+			<div class="main-header">
+				<div class="container">
+					<div class="logo-wrap" itemprop="logo">
+						<img src="static/images/site-logo.jpg" alt="Logo Image">
+						<!-- <h1>Education</h1> -->
+					</div>
+					<div class="nav-wrap">
+						<nav class="nav-desktop">
+							<ul class="menu-list">
+								<li><a href="#">Home</a></li>
+								
+								<li><a href="predictor.html">Predict</a></li>
+								<li><a href="recommender.html">Recommend</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- Header Close -->
+		<div class="banner" style="position: relative;">
+			<div>
+				<img src="static/images/page-banner.jpg" alt="Image of Bannner" style="position: absolute;">
+				
+			</div>
+			<div class="container" style="margin-top: 2%;" >
+				<h1 style="margin: 0;">welcome to University Recommender</h1>
+				<h3>This site helps you to analyse your scores and find your best fit amaong best Universities</h3>
+			</div>
+			
+			<br><br><br>
+			<br><br><br>
+			<br><br><br>
+			<br><br><br>
+			<a href="predictor.html">
+				<div class="flip-card" style="position: relative; margin-left: 20%; margin-right: 20%; display: inline-block; " >
+					<div class="flip-card-inner">
+					  <div class="flip-card-front">
+						  
+							<img src="static/images/predict.png" alt="Avatar" style="width:300px;height:300px; position: relative; ">
+						  
+						
+					  </div>
+					  <div class="flip-card-back" style="text-align: center;">
+						<h1 style="margin-top: 30%;">Predict</h1>
+						<h2 style="padding-left: 2%;padding-right: 2%;">Enter your dream University and check the possiblity</h2>
+						
+					  </div>
+					</div>
+				  </div>
+				</a>
+				  
+
+				  <a href="recommender.html">
+				  <div class="flip-card" style="position: relative;  display: inline-block;">
+					<div class="flip-card-inner">
+					  <div class="flip-card-front">
+						<img src="static/images/recommend.jpeg" alt="Avatar" style="width:300px;height:300px; position: relative;">
+					  </div>
+					  <div class="flip-card-back" style="text-align: center;">
+						<h1 style="margin-top: 30%;">Recommend</h1>
+						<h2>Enter your profile and see the best available options for you</h2>
+						
+					  </div>
+					</div>
+				  </div> 
+				</a>
+
+			  
+			<!-- <div style="display: inline">
+				<div class="flip-card2" style="position: relative; margin-left: 20%;">
+					<div class="flip-card-inner2">
+					  <div class="flip-card-front2">
+						<img src="static/images/predict.png" alt="Avatar" style="width:300px;height:300px; position: relative;">
+					  </div>
+					  <div class="flip-card-back2" style="text-align: center;">
+						<h1 style="margin-top: 30%;">Predict</h1>
+						<h2>Enter your dream University and check the posiblity</h2>
+						
+					  </div>
+					</div>
+				  </div>
+			</div> -->
+			  
+
+		</div>
+
+
+		<!-- <div class="banner" style="position: relative;">
+			<div class="owl-four owl-carousel" itemprop="image">
+				<img src="static/images/page-banner.jpg" alt="Image of Bannner">
+				<img src="static/images/page-banner2.jpg" alt="Image of Bannner">
+				<img src="static/images/page-banner3.jpg" alt="Image of Bannner">
+			</div>
+			<div class="container" itemprop="description">
+				<h1>welcome to University Recommender</h1>
+				<h3>This site helps you to analyse your scores and find your best fit amaong best Universities</h3>
+			</div>
+			 
+			 
+			 
+			  <div class="flip-card" style="position: relative;">
+				<div class="flip-card-inner">
+				  <div class="flip-card-front">
+					<img src="static/images/predict.png" alt="Avatar" style="width:300px;height:300px; position: relative;">
+				  </div>
+				  <div class="flip-card-back">
+					<h1>John Doe</h1>
+					<p>Architect & Engineer</p>
+					<p>We love that guy</p>
+				  </div>
+				</div>
+			  </div>
+		</div> -->
+		
+		
+		
+		
+	<script type="text/javascript" src="static/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="static/js/lightbox.js"></script>
+	<script type="text/javascript" src="static/js/all.js"></script>
+	<script type="text/javascript" src="static/js/isotope.pkgd.min.js"></script>
+	<script type="text/javascript" src="static/js/owl.carousel.js"></script>
+	<script type="text/javascript" src="static/js/jquery.flexslider.js"></script>
+	<script type="text/javascript" src="static/js/jquery.rateyo.js"></script>
+	<!-- <script type="text/javascript" src="js/jquery.mmenu.all.js"></script> -->
+	<!-- <script type="text/javascript" src="js/jquery.meanmenu.min.js"></script> -->
+	<script type="text/javascript" src="static/js/custom.js"></script>
+</body>
+</html>
