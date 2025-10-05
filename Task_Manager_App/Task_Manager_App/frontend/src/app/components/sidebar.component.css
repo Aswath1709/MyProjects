@@ -1,0 +1,49 @@
+.sidebar {
+  width: 250px;
+  background-color: #121a2f;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-links li {
+  list-style: none;
+  margin: 15px 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.user-section {
+  margin-top: auto;
+}
+
+.logout-button {
+  display: block; /* Ensures it takes full width of its container */
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 20px; /* Provides space above the button */
+  background-color: #dc3545; /* A standard red color for logout */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Slightly rounded corners */
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+  text-align: center; /* Center the text inside the button */
+}
+
+.logout-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.logout-button:active {
+  transform: translateY(1px); /* Slight press effect on click */
+}

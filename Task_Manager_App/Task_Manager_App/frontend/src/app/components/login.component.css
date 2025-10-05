@@ -1,0 +1,122 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Full viewport height */
+  background-color: #0f172a; /* Dark background */
+  color: #e2e8f0; /* Light text */
+  font-family: 'Inter', sans-serif;
+  padding: 40px 40px 40px 750px;;
+  box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.login-form {
+  background-color: #1e293b; /* Slightly lighter dark background for the form */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid #334155;
+}
+
+.login-title {
+  color: #cbd5e1;
+  margin-bottom: 30px;
+  font-size: 2.2em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #475569; /* Darker border */
+  border-radius: 8px;
+  background-color: #2e3b4d; /* Darker input background */
+  color: #e2e8f0;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #3b82f6; /* Blue focus glow */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  outline: none;
+}
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3b82f6; /* Blue button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:hover:not(:disabled) {
+  background-color: #2563eb; /* Darker blue on hover */
+  transform: translateY(-2px);
+}
+
+.login-button:disabled {
+  background-color: #60a5fa; /* Lighter blue when disabled */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.error-message {
+  color: #ef4444; /* Red for errors */
+  margin-top: 20px;
+  font-size: 0.95em;
+  font-weight: 500;
+}
+
+.register-link {
+  margin-top: 25px;
+  color: #94a3b8;
+  font-size: 0.95em;
+}
+
+.register-link a {
+  color: #3b82f6; /* Blue link */
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #2563eb; /* Darker blue on hover */
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .login-form {
+    padding: 30px 20px;
+  }
+
+  .login-title {
+    font-size: 1.8em;
+  }
+}

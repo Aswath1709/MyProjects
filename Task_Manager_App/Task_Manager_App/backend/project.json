@@ -1,0 +1,49 @@
+{
+  "name": "backend",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "root": "backend",  
+  "sourceRoot": "backend/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "webpack-cli build",
+        "args": ["node-env=production"]
+      },
+      "configurations": {
+        "development": {
+          "args": ["node-env=development"]
+        }
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "backend:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "backend:build:development"
+        },
+        "production": {
+          "buildTarget": "backend:build:production"
+        }
+      }
+    },
+   "test": {
+  "executor": "@nx/jest:jest",
+  "outputs": ["{workspaceRoot}/coverage/backend"],
+  "options": {
+    "jestConfig": "backend/jest.config.ts",
+    "tsConfig": "backend/tsconfig.spec.json",
+    "passWithNoTests": true
+  }
+}
+  }
+}

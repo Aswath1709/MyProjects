@@ -1,0 +1,61 @@
+services:
+  couchdb_task_manager:
+    image: couchdb:3.3
+    container_name: couchdb_task_manager
+    ports:
+      - "5984:5984"
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://admin:password@localhost:5984/_up"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+
+  elasticsearch_task_manager:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.0.0
+    container_name: elasticsearch_task_manager
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cat/health?h=st || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: nestjs_task_manager
+    ports:
+      - "3000:3000"
+    environment:
+      - JWT_SECRET=qwertyuiopqwertyuiopqwertyuiop12
+      - COUCHDB_URL=http://admin:password@couchdb_task_manager:5984
+      - ELASTICSEARCH_NODE=http://elasticsearch_task_manager:9200
+    depends_on:
+      couchdb_task_manager:
+        condition: service_healthy
+      elasticsearch_task_manager:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  couchdb_data:
+  elasticsearch_data:

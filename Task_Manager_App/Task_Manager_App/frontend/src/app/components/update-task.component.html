@@ -1,0 +1,38 @@
+<div class="update-task-container">
+  <h1 class="main-title">Update Task</h1>
+
+  <p *ngIf="isLoading">Loading task for update...</p>
+  <p *ngIf="error" class="error-message">{{ error }}</p>
+
+  <div *ngIf="!isLoading && !error && task" class="update-form">
+    <form (ngSubmit)="saveTask()">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input id="title" type="text" [(ngModel)]="task.title" name="title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" [(ngModel)]="task.description" name="description" rows="5"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select id="status" name="status" [(ngModel)]="task.status" required>
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="isSaving">
+          {{ isSaving ? 'Updating...' : 'Save Changes' }}
+        </button>
+        <button type="button" class="cancel-button" (click)="router.navigate(['/view-task'])">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <p *ngIf="!isLoading && !error && !task">Task not found or unable to load.</p>
+</div>

@@ -1,0 +1,63 @@
+.main-content {
+  padding: 40px 40px 40px 500px;
+  color: white;
+  background-color: #0f172a;
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.main-inner {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.prompt-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 30px 0;
+}
+
+.prompt-cards button {
+  background: #1e293b;
+  border: none;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.prompt-cards button:hover {
+  background: #334155;
+}
+
+.custom-query {
+  display: flex;
+  gap: 10px;
+}
+
+.custom-query input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.custom-query button {
+  padding: 10px 20px;
+  border: none;
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: bold;
+  border-radius: 5px;
+}

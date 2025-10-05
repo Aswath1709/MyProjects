@@ -1,0 +1,95 @@
+.create-task-container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #0f172a; 
+  border: 1px solid #1e293b; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  font-family: sans-serif;
+  color: white; 
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px; 
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px; 
+  font-weight: bold;
+  color: white; 
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+  width: calc(100% - 22px); 
+  padding: 12px; 
+  border-radius: 5px; 
+  border: 1px solid #334155; 
+  background-color: #1e293b; 
+  color: white; 
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  min-height: 100px; 
+  resize: vertical;
+}
+
+
+button[type="submit"] {
+  padding: 12px 25px;
+  border: none;
+  background: #38bdf8;
+  font-weight: bold;
+  border-radius: 5px; 
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.2s ease; 
+  width: 100%; 
+  margin-top: 10px; 
+}
+
+button[type="submit"]:hover {
+  background: #0ea5e9; 
+  transform: translateY(-1px); 
+}
+
+button[type="submit"]:disabled {
+  background-color: #334155; 
+  color: #a0aec0; 
+  cursor: not-allowed;
+  transform: translateY(0); 
+}
+
+.message {
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.message.success {
+  background-color: #22c55e;
+  color: white;
+}
+
+.message.error {
+  background-color: #ef4444; 
+  color: white;
+}
+
+.error-message { 
+  color: #ef4444;
+  font-size: 0.85em;
+  margin-top: 5px;
+}

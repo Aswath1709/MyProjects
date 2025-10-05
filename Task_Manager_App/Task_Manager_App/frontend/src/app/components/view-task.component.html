@@ -1,0 +1,53 @@
+<div class="task-list-container">
+  <h1 class="main-title">All Tasks</h1>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Search tasks by title or description..."
+      (keyup.enter)="loadTasks()"
+    />
+    <button (click)="loadTasks()">Search</button>
+  </div>
+
+  <p *ngIf="isLoading">Loading tasks...</p>
+  <p *ngIf="error" class="error-message">{{ error }}</p>
+
+  <div *ngIf="!isLoading && !error">
+    <p *ngIf="tasks.length === 0" class="no-tasks-message">No tasks found. Create one!</p>
+
+    <table *ngIf="tasks.length > 0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td>
+            <span
+              [class.status-pending]="task.status === 'Pending'"
+              [class.status-in-progress]="task.status === 'In Progress'"
+              [class.status-completed]="task.status === 'Completed'"
+            >
+              {{ task.status }}
+              <ng-container *ngIf="task.status === 'Completed'">&#x2714;</ng-container>
+            </span>
+          </td>
+          <td>{{ task.createdAt ? (task.createdAt | date:'short') : 'N/A' }}</td>
+          <td>
+            <button class="edit-button" [routerLink]="['/update-task', task._id]">Edit</button>
+            <button class="delete-button" (click)="deleteTask(task)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

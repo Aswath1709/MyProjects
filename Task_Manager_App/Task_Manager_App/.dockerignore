@@ -1,0 +1,26 @@
+# Node.js related
+node_modules/
+npm-debug.log
+.npm/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Version control
+.git/
+.gitignore
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Nx specific (if not already covered)
+.nx/cache/
+tmp/
