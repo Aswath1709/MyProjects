@@ -8,7 +8,7 @@ BASE_DIR="$HOME/Downloads/MyProjects"
 
 # List of project folders (based on your screenshot)
 PROJECTS=(
-"Distributed_ML_collision_severity_classification"
+"Full_Stack_Attendance_System_For_Universities"
 )
 
 # Colors for output
